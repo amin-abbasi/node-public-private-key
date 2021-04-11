@@ -1,0 +1,127 @@
+{
+	"info": {
+		"_postman_id": "795d9d08-e6b4-4c84-86ad-acdfd0aaceb6",
+		"name": "Encryption",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Encrypted Action",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"data\": {\n\t\t\"action\": \"multiply\",\n\t\t\"var1\": 4,\n\t\t\"var2\": 5\n\t}\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/action",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"action"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Encrypted Action",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"data\": {\n\t\t\"action\": \"multiply\",\n\t\t\"var1\": 4,\n\t\t\"var2\": 5\n\t}\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/action",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"action"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "54"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"36-FHELyRJ7eTv/ninH11/DTclhKHk\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 11 Apr 2021 06:25:00 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"result\": {\n        \"success\": true,\n        \"result\": 20\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/health",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
