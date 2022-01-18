@@ -1,41 +1,29 @@
 // Import npm modules
-const express = require('express')
-const crypto  = require('crypto')
-const fetch   = require('node-fetch')
-const fs      = require('fs')
-const { celebrate, Joi, errors } = require('celebrate')
-
-require('dotenv').config()
+import express, { Request, Response } from 'express'
+import { celebrate, Joi, errors } from 'celebrate'
+import crypto from 'crypto'
+import fs     from 'fs'
+import path   from 'path'
+import dotenv  from 'dotenv'
 
 // Initialize App & it's Middlewares
+dotenv.config()
 const app = express()
 app.use(express.urlencoded({ extended: true }))    // parse application/x-www-form-urlencoded
 app.use(express.json())                            // parse application/json
 
 // ---------------------------------- Key Pair -----------------------------------
-const server1PublicKey = fs.readFileSync('./key-pair/public1.pem', 'utf-8')
-const myPrivateKey = fs.readFileSync('./key-pair/private2.pem', 'utf-8')
+const server1PublicKey = fs.readFileSync(path.join(__dirname, './key-pair/public1.pem'), 'utf-8')
+const myPrivateKey = fs.readFileSync(path.join(__dirname, './key-pair/private2.pem'), 'utf-8')
 
 // ---------------------------------- Logger Config -----------------------------------
-const { transports, format } = require('winston')
-const { logger } = require('express-winston')
-app.use( logger({
-  transports: [new transports.Console()],
-  format: format.combine(
-    format.colorize(),
-    format.timestamp({format: 'YYYY-MM-DD HH:mm:ss'}),
-    format.json(),
-    format.printf((info) => `[${info.timestamp}] ${JSON.stringify(info.meta.req)} ------ ${JSON.stringify(info.meta.res)} ${info.level}: ${info.message}`)
-  ),
-  meta: true,
-  expressFormat: true,
-  colorize: true,
-}) )
+import logger from '../services/logger'
+app.use(logger)
 
 
 // -------------------------------------- Routes -------------------------------------
 // Health-check Endpoint
-app.get('/health', celebrate({ query: {} }), (req, res) => { res.send(`${res.statusCode}`) })
+app.get('/health', celebrate({ query: {} }), (req: Request, res: Response) => { res.send(`${res.statusCode}`) })
 
 // Get an encrypted message and process it
 const validation = celebrate({
@@ -44,7 +32,7 @@ const validation = celebrate({
   },
   query: {}
 })
-app.post('/action', validation, async (req, res, next) => {
+app.post('/action', validation, async (req: Request, res: Response) => {
   try {
     const encryptedData = req.body.data
 
@@ -87,4 +75,4 @@ app.post('/action', validation, async (req, res, next) => {
 // Use Celebrate to validate routes
 app.use(errors())
 
-module.exports = app
+export default app

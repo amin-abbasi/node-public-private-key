@@ -1,0 +1,25 @@
+{
+  "name": "node-public-private-key",
+  "version": "1.0.0",
+  "description": "A simple node.js micro-service project to showcase how to communicate securely between micro-services using public-private keys.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "celebrate": "15.0.0",
+    "colors": "1.4.0",
+    "dotenv": "14.2.0",
+    "express": "4.17.2",
+    "express-winston": "4.2.0",
+    "mongoose": "6.1.7",
+    "node-fetch": "2.6.1",
+    "winston": "3.4.0"
+  },
+  "devDependencies": {
+    "@types/express": "4.17.13",
+    "@types/node-fetch": "2.5.12"
+  }
+}
